@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign In</title>
+   <link rel="icon" type="image/jpeg" href="https://uploads.onecompiler.io/446mb4fr3/446mb4taj/mka%20logo.jpeg">
+<style>
+  body {
+    background-image: url(https://uploads.onecompiler.io/446mb4fr3/446mb4taj/7BQ9Ig391FbwCzMSgnCCgrzbEpnWXufcUSKwe6g7GXI.webp);
+    font-family: Arial, sans-serif;
+    /* Removed background-color for single background image */
+    padding: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+  }
+  h2{
+    color: white;
+  }
+  form {
+    background-color: white;
+    padding: 20px;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #ccc;
+  }
+  input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+  button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  .saved-entries {
+    margin-top: 30px;
+    max-width: 400px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #ccc;
+  }
+  .entry {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+  }
+  .entry:last-child {
+    border-bottom: none;
+  }
+  /* Announcement bar styles */
+  #announcementBar {
+    display: none; /* hidden by default */
+    background-color: #ffcc00;
+    color: #333;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 400px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+  <h2>Sign In</h2>
+
+  <div id="announcementBar">Maximum capacity reached. No more sign-ins allowed.</div>
+
+  <form id="signInForm">
+    <input type="text" id="name" placeholder="Enter your name" required />
+    <input type="date" id="date" required />
+    <input type="time" id="time" required />
+    <select id="activity" required>
+      <option value="" disabled selected>Select activity</option>
+      <option value="Lunch Recess">Lunch Recess</option>
+      <option value="CWP">CWP</option>
+    </select>
+    <button type="submit">Save</button>
+  </form>
+
+  <script src="clock.js"></script>
+
+  <div class="saved-entries" id="savedEntries">
+    <h3>Saved Sign-Ins</h3>
+    <div id="entriesContainer"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('signInForm');
+    const entriesContainer = document.getElementById('entriesContainer');
+    const announcementBar = document.getElementById('announcementBar');
+    const maxSignIns = 10;
+
+    function resetIfNewDay() {
+      const todayStr = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      const lastReset = localStorage.getItem('lastResetDate');
+
+      if (lastReset !== todayStr) {
+        localStorage.removeItem('signInEntries');
+        localStorage.setItem('lastResetDate', todayStr);
+      }
+    }
+
+    function updateAnnouncementAndButton(entries) {
+      if (entries.length >= maxSignIns) {
+        announcementBar.style.display = 'block';
+        form.querySelector('button[type="submit"]').disabled = true;
+      } else {
+        announcementBar.style.display = 'none';
+        form.querySelector('button[type="submit"]').disabled = false;
+      }
+    }
+
+    function loadEntries() {
+      resetIfNewDay();
+
+      const entries = JSON.parse(localStorage.getItem('signInEntries')) || [];
+      entriesContainer.innerHTML = '';
+      updateAnnouncementAndButton(entries);
+
+      if (entries.length === 0) {
+        entriesContainer.innerHTML = '<p>No saved entries yet.</p>';
+        return;
+      }
+      entries.forEach((entry) => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.textContent = `${entry.name} signed in for ${entry.activity} on ${entry.date} at ${entry.time}`;
+        entriesContainer.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const activity = document.getElementById('activity').value;
+
+      if (!name || !date || !time || !activity) return;
+
+      let entries = JSON.parse(localStorage.getItem('signInEntries')) || [];
+
+      if (entries.length >= maxSignIns) return; // block more entries
+
+      entries.push({ name, date, time, activity });
+      localStorage.setItem('signInEntries', JSON.stringify(entries));
+
+      form.reset();
+      loadEntries();
+    });
+
+    // Reset exactly at 11:59 PM local time by checking every minute
+    function setupMidnightResetCheck() {
+      setInterval(() => {
+        const now = new Date();
+        if (now.getHours() === 23 && now.getMinutes() === 59) {
+          localStorage.removeItem('signInEntries');
+          localStorage.setItem('lastResetDate', now.toISOString().split('T')[0]);
+          loadEntries();
+        }
+      }, 60 * 1000);
+    }
+
+    loadEntries();
+    setupMidnightResetCheck();
+  </script>
+</body>
+</html>
