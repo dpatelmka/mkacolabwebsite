@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C0-L@B!!!</title>
+  <link rel="icon" type="image/jpeg" href="https://uploads.onecompiler.io/446mb4fr3/446mb4taj/mka%20logo.jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Background and body */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background-image: url("https://images.unsplash.com/photo-1509803874385-db7c23652552?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Glass container */
+    .content-container {
+      background: rgba(0 0 0 / 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 30px 40px;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgb(0 0 0 / 0.6);
+    }
+
+    h1 {
+      margin: 0 0 16px 0;
+      font-weight: 700;
+      font-size: 2.8rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin: 10px 0 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* Search bar styling */
+    #siteSearch {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 30px auto;
+      display: block;
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      border-radius: 40px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(27, 39, 69, 0.35);
+      outline: none;
+      transition: box-shadow 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      color: #222;
+    }
+    #siteSearch::placeholder {
+      color: #666;
+    }
+    #siteSearch:focus {
+      box-shadow: 0 0 12px rgba(75, 108, 183, 0.8);
+    }
+
+    /* Search results container */
+    #searchResults {
+      max-width: 400px;
+      margin: 0 auto 30px auto;
+      color: #ddd;
+      text-align: left;
+      user-select: none;
+    }
+    #searchResults a {
+      color: #4b6cb7;
+      text-decoration: underline;
+      display: block;
+      margin-bottom: 4px;
+    }
+    #searchResults a:hover,
+    #searchResults a:focus {
+      text-decoration: none;
+      outline: none;
+    }
+    #searchResults div.desc {
+      font-size: 0.85rem;
+      color: #bbb;
+      margin-bottom: 15px;
+    }
+
+    /* News section */
+    #techNewsSection {
+      margin-top: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    #techNewsSection h2 {
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-shadow: rgba(0,0,0,0.6) 2px 2px 4px;
+    }
+    #techNewsList {
+      list-style: none;
+      padding-left: 0;
+      color: #ddd;
+    }
+    #techNewsList li {
+      margin-bottom: 15px;
+    }
+    #techNewsList a {
+      color: #4b6cb7;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    #techNewsList a:hover,
+    #techNewsList a:focus {
+      text-decoration: none;
+      outline: none;
+    }
+    #techNewsList div {
+      font-size: 0.85rem;
+      color: #bbb;
+    }
+    #techNewsError {
+      color: #f88;
+      margin-top: 8px;
+    }
+    
+    /* Styled links as buttons */
+    a.button-link {
+      display: inline-block;
+      background: linear-gradient(45deg, #4b6cb7, #182848);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.4rem;
+      padding: 16px 36px;
+      margin: 12px 18px;
+      border-radius: 40px;
+      box-shadow: 0 5px 20px rgb(27 39 69 / 0.7);
+      transition: background 0.35s ease, transform 0.15s ease;
+      user-select: none;
+      min-width: 160px;
+    }
+
+    a.button-link:hover,
+    a.button-link:focus {
+      background: linear-gradient(45deg, #182848, #4b6cb7);
+      transform: scale(1.05);
+      outline: none;
+      box-shadow: 0 8px 30px rgb(27 39 69 / 0.9);
+    }
+
+    /* Clock styling */
+    #clock {
+      margin-top: 32px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      background: rgba(0 0 0 / 0.5);
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgb(0 0 0 / 0.7);
+      text-shadow: none;
+      user-select: none;
+    }
+
+    @media (max-width: 480px) {
+      .content-container {
+        padding: 25px 20px;
+      }
+      a.button-link {
+        min-width: auto;
+        width: 100%;
+        margin: 10px 0;
+        font-size: 1.2rem;
+        padding: 14px 0;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content-container" role="main">
+    <h1>Co-lab Website</h1>
+    <p>This is the official Co-Lab website where you can find all related stuff to the MKA middle school Co-Lab.</p>
+    <p>Use the sign in button below to get a pass for Lunch recess or CWP. The announcement bar will show if it is at max capacity.</p>
+
+    <!-- Site-wide search bar -->
+    <input
+      type="text"
+      id="siteSearch"
+      aria-label="Site-wide search"
+      placeholder="Search the site..."
+      autocomplete="off" />
+
+    <div id="searchResults" role="listbox" aria-live="polite"></div>
+<!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading" data-fw-param="176378/"></script> <!-- end feedwind code -->
+    <nav aria-label="Primary Navigation">
+      <a href="signin.html" class="button-link">Sign In</a>
+      <a href="facultypage.html" class="button-link">Faculty Page</a>
+      <a href="infopage.html" class="button-link">Info Page</a>
+      <a href="devpage.html" class="button-link">!LOCKED! Admin Page</a>
+    </nav>
+
+    <p id="clock" aria-live="polite" aria-atomic="true"></p>
+  </div>
+
+  <script src="clock.js"></script>
+
+  <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+  <script>
+    // Search functionality
+    (function(){
+      const pages = [
+        {title: 'Sign In', url: 'signin.html', description: 'Sign in for lunch recess or CWP'},
+        {title: 'Faculty Page', url: 'facultypage.html', description: 'Book Co-Lab collaboration appointments'},
+        {title: 'Info Page', url: 'infopage.html', description: 'Resources and FAQ for the Co-Lab'},
+        {title: 'Admin Page', url: 'devpage.html', description: 'Developer control panel (password protected)'},
+        {title: 'Co-Lab collab Appointments Page', url: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ28fBUMO0HRYBPZS1bkbe1jXzMw2REakonFQ97TAimW8ZvILMmTTldBIflpe-1WSsf8fI-4rMsr?gv=true', description: 'For Faculty use to make Co-Lab Collab appointments'}
+      ];
+
+      const searchInput = document.getElementById('siteSearch');
+      const resultsContainer = document.getElementById('searchResults');
+
+      searchInput.addEventListener('input', e => {
+        const query = e.target.value.trim().toLowerCase();
+        resultsContainer.innerHTML = '';
+        if (!query) return;
+
+        const filtered = pages.filter(page =>
+          page.title.toLowerCase().includes(query) ||
+          page.description.toLowerCase().includes(query)
+        );
+
+        if (filtered.length === 0) {
+          resultsContainer.textContent = 'No results found.';
+          return;
+        }
+
+        filtered.forEach(page => {
+          const link = document.createElement('a');
+          link.href = page.url;
+          link.textContent = page.title;
+          link.setAttribute('role', 'option');
+          link.style.outline = 'none';
+
+          const desc = document.createElement('div');
+          desc.textContent = page.description;
+          desc.className = 'desc';
+
+          const wrapper = document.createElement('div');
+          wrapper.appendChild(link);
+          wrapper.appendChild(desc);
+
+          resultsContainer.appendChild(wrapper);
+        });
+      });
+    })();
+
+  </script>
+</body>
+</html>

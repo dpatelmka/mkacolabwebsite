@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Faculty Page</title>
+  <link rel="icon" type="image/jpeg" href="https://uploads.onecompiler.io/446mb4fr3/446mb4taj/mka%20logo.jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background-image: url("https://uploads.onecompiler.io/446mb4fr3/446mb4taj/forest%20backround.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .content-container {
+      background: rgba(255 255 255 / 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 30px 40px;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      color: #222;
+      user-select: none;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.4rem;
+      margin-bottom: 24px;
+      color: #1a1a1a;
+      user-select: text;
+    }
+
+    p {
+      font-size: 1.12rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      user-select: text;
+    }
+
+    a.button-link {
+      display: inline-block;
+      background: linear-gradient(45deg, #4b6cb7, #182848);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.4rem;
+      padding: 18px 48px;
+      border-radius: 40px;
+      box-shadow: 0 5px 20px rgb(27 39 69 / 0.7);
+      user-select: none;
+      transition: background 0.35s ease, transform 0.15s ease;
+    }
+    a.button-link:hover,
+    a.button-link:focus {
+      background: linear-gradient(45deg, #182848, #4b6cb7);
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    @media (max-width: 480px) {
+      .content-container {
+        max-width: 100%;
+        padding: 25px 20px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      a.button-link {
+        width: 100%;
+        padding: 16px 0;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="content-container" role="main" aria-labelledby="faculty-title">
+    <h1 id="faculty-title">Co-Lab Faculty Page</h1>
+    <p>
+      Faculty and staff, if you are interested in collaborating with us, or if you want to visit the Co-Lab with your students, use the scheduler below to book time in the space. Sessions are broken into 20 minute blocks, but you may book as many as you need from what's available. To ensure smooth and safe exploration, all reservations require Mr. McLaughlin, Ms. Chung, or Mr. Alexander to be present.
+    </p>
+    <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ28fBUMO0HRYBPZS1bkbe1jXzMw2REakonFQ97TAimW8ZvILMmTTldBIflpe-1WSsf8fI-4rMsr?gv=true" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="button-link" 
+       aria-label="Open Co-Lab collaboration appointment scheduler in a new tab">
+      Co-Lab Collaboration Appointments
+    </a>
+  </main>
+</body>
+</html>
